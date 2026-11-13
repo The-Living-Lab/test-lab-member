@@ -1,0 +1,9 @@
+-- Tribute & Treaty v2 — Phase 0.5 schema (RECORD ONLY: already applied directly; do not run as a migration)
+-- Every table has row-level security on. Browsers never write any table:
+-- all writes go through server functions using the service role, which validate
+-- the caller's anonymous identity, the room code, the phase, and one vote per seat per turn.
+-- Browsers may READ only: their own seat, and the rooms they host or sit in (for realtime updates).
+-- Tables: rooms, room_private (design + hashed recovery key + AI call count), seats, votes,
+--         designs (class library submissions, hashed edit keys), feedback, attempts (lockout counters).
+-- Policies: rooms_member_read (host or seated player may select), seats_own_read (own seat only).
+-- Realtime: public.rooms is in the supabase_realtime publication.
